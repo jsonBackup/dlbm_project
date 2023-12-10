@@ -26,6 +26,8 @@ class SOT(nn.Module):
         cost_masked = self.mask_diagonal(cost, self._diagonal_value)
 
         sinkhorn = self.sinkhorn(cost_masked)
+
+        # Scale the values to (0, 1] range
         sinkhorn = sinkhorn / sinkhorn.max(dim=-1, keepdim=True)[0]
 
         output = self.mask_diagonal(sinkhorn, 1)
@@ -40,6 +42,7 @@ class SOT(nn.Module):
 
     def sinkhorn(self, X):
 
+        # / X.shape[-2] Modifies the normalization target (faster convergence)
         row_marginals = torch.ones(X.shape[:-1], requires_grad=False) / X.shape[-2]
         col_marginals = torch.ones(X.shape[:-1], requires_grad=False) / X.shape[-2]
 
