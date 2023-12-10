@@ -53,6 +53,22 @@ class MetaTemplate(nn.Module):
 
         return z_support, z_query
 
+    def parse_feature_together(self, x, is_feature):
+        """New implementation added because I didn't feel like putting the support and query together after!"""
+        if isinstance(x, list):
+            x = [Variable(obj.to(self.device)) for obj in x]
+        else: x = Variable(x.to(self.device))
+        if is_feature:
+            z_all = x
+        else:
+            if isinstance(x, list):
+                x = [obj.contiguous().view(self.n_way * (self.n_support + self.n_query), *obj.size()[2:]) for obj in x]
+            else: x = x.contiguous().view(self.n_way * (self.n_support + self.n_query), *x.size()[2:])
+            z_all = self.feature.forward(x)
+            z_all = z_all.view(self.n_way, self.n_support + self.n_query, -1)
+
+        return z_all
+
     def correct(self, x):
         scores = self.set_forward(x)
         y_query = np.repeat(range(self.n_way), self.n_query)
