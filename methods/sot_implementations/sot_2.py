@@ -5,9 +5,9 @@ import torch.nn as nn
 class SOT(nn.Module):
 
     def __init__(
-            self,
-            sinkhorn_regularization: float = 0.1,
-            sinkhorn_iterations: int = 10,
+        self,
+        sinkhorn_regularization: float = 0.1,
+        sinkhorn_iterations: int = 10,
     ):
 
         super().__init__()
@@ -61,6 +61,7 @@ class SOT(nn.Module):
             cols += self.sinkhorn_regularization * new_cols
 
         transport_plan_log = (-X + rows.unsqueeze(-1) + cols.unsqueeze(-2)) / self.sinkhorn_regularization
+
         return torch.exp(transport_plan_log)
 
     @staticmethod
