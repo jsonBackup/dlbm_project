@@ -1,8 +1,11 @@
+# Python
+__pycache__
 
-.idea/dlbm_project.iml
+checkpoints/*
+data/*
+wandb/*
+outputs/*
 
-.idea/misc.xml
 
-.idea/modules.xml
+.idea/*
 
-.idea/vcs.xml
