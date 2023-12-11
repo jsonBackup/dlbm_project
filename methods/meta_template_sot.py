@@ -1,7 +1,7 @@
 from torch.autograd import Variable
 
 from methods.meta_template import MetaTemplate
-from sot_implementations.sot_2 import SOT
+from methods.sot import SOT
 
 
 class MetaTemplateSOT(MetaTemplate):
