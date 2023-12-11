@@ -28,8 +28,8 @@ checkpoint:
   time: latest
 
 wandb:
-  project: ???
-  entity: ???
+  project: dlbm_self_optimal_transport_feature_transform
+  entity: dlbm_20
   mode: "online" # Can set to offline, disabled
 
 iter_num: 600
