@@ -19,8 +19,8 @@ class SOT(nn.Module):
 
     def __call__(self, X: torch.Tensor, return_cost=False) -> torch.Tensor:
 
-        if X.dim() > 2:
-            X = X.transpose(0, -2)
+        if not isinstance(X, torch.Tensor):
+            X = torch.tensor(X)
 
         cost = self.compute_cost(X)
         cost_masked = self.mask_diagonal(cost, self._diagonal_value)
@@ -32,9 +32,6 @@ class SOT(nn.Module):
 
         output = self.mask_diagonal(sinkhorn, 1)
 
-        if output.dim() > 2:
-            output = output.transpose(0, -2)
-
         if return_cost:
             return output, cost
 
@@ -43,11 +40,11 @@ class SOT(nn.Module):
     def sinkhorn(self, X):
 
         # / X.shape[-2] Modifies the normalization target (faster convergence)
-        row_marginals = torch.ones(X.shape[:-1], requires_grad=False) / X.shape[-2]
-        col_marginals = torch.ones(X.shape[:-1], requires_grad=False) / X.shape[-2]
+        row_marginals = torch.ones(X.shape[:-1], requires_grad=False, device=X.device) / X.shape[-2]
+        col_marginals = torch.ones(X.shape[:-1], requires_grad=False, device=X.device) / X.shape[-2]
 
-        rows = torch.zeros_like(row_marginals, requires_grad=False)
-        cols = torch.zeros_like(col_marginals, requires_grad=False)
+        rows = torch.zeros_like(row_marginals, requires_grad=False, device=X.device)
+        cols = torch.zeros_like(col_marginals, requires_grad=False, device=X.device)
 
         # Sinkhorn iterations
         for i in range(self.sinkhorn_iterations):
@@ -69,7 +66,7 @@ class SOT(nn.Module):
 
     @staticmethod
     def mask_diagonal(X, value):
-        return X + value * torch.eye(X.shape[-1])
+        return X + value * torch.eye(X.shape[-1], device=X.device)
 
     @staticmethod
     def compute_cost(X):
