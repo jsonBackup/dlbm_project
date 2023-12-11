@@ -1,6 +1,7 @@
 # from .baselinetrain import *
 # from .baselinefinetune import *
 # from .protonet import *
+# from .protonet_sot import *
 # from .matchingnet import *
 # from .relationnet import *
 # from .maml import *
