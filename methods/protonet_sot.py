@@ -16,6 +16,6 @@ class ProtoNetSOT(MetaTemplateSOT, ProtoNet):
         sinkhorn_regularization=0.1
     ):
         ProtoNet.__init__(self, backbone, n_way, n_support)
-        MetaTemplateSOT.__init__(self, backbone, n_way, n_support, sinkhorn_iterations, sinkhorn_regularization)
+        MetaTemplateSOT.__init__(self, backbone, n_way, n_support, sinkhorn_iterations=sinkhorn_iterations, sinkhorn_regularization=sinkhorn_regularization)
 
     
