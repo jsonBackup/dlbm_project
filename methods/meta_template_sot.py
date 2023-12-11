@@ -14,7 +14,7 @@ class MetaTemplateSOT(MetaTemplate):
         sinkhorn_iterations=10,
         sinkhorn_regularization=0.1
     ):
-        super(MetaTemplateSOT, self).__init__(backbone, n_way, n_support, change_way)
+        MetaTemplate.__init__(self, backbone, n_way, n_support, change_way)
         
         self.sot = SOT(sinkhorn_regularization=sinkhorn_regularization, sinkhorn_iterations=sinkhorn_iterations)
 
