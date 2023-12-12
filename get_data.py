@@ -73,7 +73,7 @@ def run(cfg):
             if cfg.method.name == 'maml':
                 cfg.method.stop_epoch *= model.n_task 
         
-            resume_file = get_resume_file("cfg.path")
+            resume_file = get_resume_file(cfg.model_path)
             if resume_file is not None:
                 tmp = torch.load(resume_file)
                 model.load_state_dict(tmp['state'])
