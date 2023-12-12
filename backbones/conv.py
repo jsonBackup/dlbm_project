@@ -3,32 +3,32 @@ from torch import nn as nn
 from backbones.blocks import ConvBlock, Flatten
 
 
-def Conv4():
+def Conv4(*args, **kwargs):
     return ConvNet(4)
 
 
-def Conv6():
+def Conv6(*args, **kwargs):
     return ConvNet(6)
 
 
-def Conv4NP():
+def Conv4NP(*args, **kwargs):
     return ConvNetNopool(4)
 
 
-def Conv6NP():
+def Conv6NP(*args, **kwargs):
     return ConvNetNopool(6)
 
 
-def Conv4S():
+def Conv4S(*args, **kwargs):
     return ConvNetS(4)
 
 
-def Conv4SNP():
+def Conv4SNP(*args, **kwargs):
     return ConvNetSNopool(4)
 
 
 class ConvNet(nn.Module):
-    def __init__(self, depth, flatten=True):
+    def __init__(self, depth, flatten=True, *args, **kwargs):
         super(ConvNet, self).__init__()
         trunk = []
         for i in range(depth):
@@ -50,7 +50,7 @@ class ConvNet(nn.Module):
 
 class ConvNetNopool(
     nn.Module):  # Relation net use a 4 layer conv with pooling in only first two layers, else no pooling
-    def __init__(self, depth):
+    def __init__(self, depth, *args, **kwargs):
         super(ConvNetNopool, self).__init__()
         trunk = []
         for i in range(depth):
@@ -69,7 +69,7 @@ class ConvNetNopool(
 
 
 class ConvNetS(nn.Module):  # For omniglot, only 1 input channel, output dim is 64
-    def __init__(self, depth, flatten=True):
+    def __init__(self, depth, flatten=True, *args, **kwargs):
         super(ConvNetS, self).__init__()
         trunk = []
         for i in range(depth):
@@ -92,7 +92,7 @@ class ConvNetS(nn.Module):  # For omniglot, only 1 input channel, output dim is 
 
 class ConvNetSNopool(
     nn.Module):  # Relation net use a 4 layer conv with pooling in only first two layers, else no pooling. For omniglot, only 1 input channel, output dim is [64,5,5]
-    def __init__(self, depth):
+    def __init__(self, depth, *args, **kwargs):
         super(ConvNetSNopool, self).__init__()
         trunk = []
         for i in range(depth):

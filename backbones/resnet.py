@@ -6,7 +6,7 @@ from backbones.blocks import Conv2d_fw, BatchNorm2d_fw, init_layer, Flatten, Sim
 class ResNet(nn.Module):
     maml = False  # Default
 
-    def __init__(self, block, list_of_num_layers, list_of_out_dims, flatten=True):
+    def __init__(self, block, list_of_num_layers, list_of_out_dims, flatten=True, *args, **kwargs):
         # list_of_num_layers specifies number of layers in each stage
         # list_of_out_dims specifies number of output channel for each stage
         super(ResNet, self).__init__()
@@ -52,21 +52,21 @@ class ResNet(nn.Module):
         return out
 
 
-def ResNet10(flatten=True):
+def ResNet10(flatten=True, *args, **kwargs):
     return ResNet(SimpleBlock, [1, 1, 1, 1], [64, 128, 256, 512], flatten)
 
 
-def ResNet18(flatten=True):
+def ResNet18(flatten=True, *args, **kwargs):
     return ResNet(SimpleBlock, [2, 2, 2, 2], [64, 128, 256, 512], flatten)
 
 
-def ResNet34(flatten=True):
+def ResNet34(flatten=True, *args, **kwargs):
     return ResNet(SimpleBlock, [3, 4, 6, 3], [64, 128, 256, 512], flatten)
 
 
-def ResNet50(flatten=True):
+def ResNet50(flatten=True, *args, **kwargs):
     return ResNet(BottleneckBlock, [3, 4, 6, 3], [256, 512, 1024, 2048], flatten)
 
 
-def ResNet101(flatten=True):
+def ResNet101(flatten=True, *args, **kwargs):
     return ResNet(BottleneckBlock, [3, 4, 23, 3], [256, 512, 1024, 2048], flatten)
