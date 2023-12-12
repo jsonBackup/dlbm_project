@@ -52,8 +52,8 @@ def run(cfg):
                 features.append(model.forward(x).cpu())
         
         features = torch.cat(features, dim=0)            
-        torch.save(features, f"{cfg.exp.name}_{mode}_features.pt")
-        print(f"Saved features to: {cfg.exp.name}_{mode}_features.pt")
+        torch.save(features, f"{cfg.output_name}_{mode}_features.pt")
+        print(f"Saved features to: {cfg.output_name}_{mode}_features.pt")
 
 
 if __name__ == '__main__':
