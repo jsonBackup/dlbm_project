@@ -47,7 +47,6 @@ def run(cfg):
         features = []
         for (x, _) in loader:
             x = x.cuda().contiguous().view(-1, *x.size()[2:])
-            print(mode, x.shape)
             with torch.no_grad():
                 features.append(model.forward(x).cpu())
         
