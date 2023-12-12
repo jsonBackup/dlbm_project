@@ -189,7 +189,7 @@ class LayerNorm_fw(nn.LayerNorm):  # layer norm MAML attempt
 class ConvBlock(nn.Module):
     maml = False  # Default
 
-    def __init__(self, indim, outdim, convdim, pool=True, padding=1):
+    def __init__(self, indim, outdim, pool=True, padding=1):
         super(ConvBlock, self).__init__()
         self.indim = indim
         self.outdim = outdim
