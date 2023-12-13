@@ -39,6 +39,15 @@ python run.py exp.name={exp_name} method=maml dataset=tabula_muris
 By default, method is set to MAML, and dataset is set to Tabula Muris.
 The experiment name must always be specified.
 
+#### Self-Optimal-Transport Feature Transform
+
+This project extends the original framework by the SOT layer and its embedding into the ProtoNet model. To use the ProtoNet model with the SOT layer user needs to specify ```method=protonet_sot```.
+
+Example:
+```bash
+python run.py exp.name={exp_name} method=protonet_sot dataset=tabula_muris
+```
+
 ### Testing
 
 The training process will automatically evaluate at the end. To only evaluate without
