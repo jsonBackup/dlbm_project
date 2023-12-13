@@ -45,13 +45,17 @@ def run(cfg):
             model.eval()
 
         features = []
-        for (x, _) in loader:
+        targets = []
+        for (x, y) in loader:
             x = x.cuda().contiguous().view(-1, *x.size()[2:])
+            targets.append(y.flatten())
             with torch.no_grad():
                 features.append(model.forward(x).cpu())
         
-        features = torch.cat(features, dim=0)            
-        torch.save(features, f"{cfg.output_name}_{mode}_features.pt")
+        features = torch.cat(features, dim=0)
+        targets = torch.cat(targets, dim=0)
+        
+        torch.save((features, targets), f"{cfg.output_name}_{mode}_features.pt")
         print(f"Saved features to: {cfg.output_name}_{mode}_features.pt")
 
 
